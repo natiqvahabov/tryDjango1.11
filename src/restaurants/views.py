@@ -41,11 +41,6 @@ def RestaurantLocationCreate(request):
 	form = RestaurantLocationCreateForm(request.POST or None)
 	if form.is_valid():
 		form.save()
-		# obj = RestaurantLocation.objects.create(
-		# 	name = form.cleaned_data('name'),
-		# 	location = form.cleaned_data('location'),
-		# 	category = form.cleaned_data('category')
-		# )
 		return HttpResponseRedirect('/restaurants/')
 	if form.errors:
 		print(form.errors)
