@@ -9,12 +9,12 @@ User = settings.AUTH_USER_MODEL
 
 # Create your models here.
 class RestaurantLocation(models.Model):
-''' 
-	RestaurantLocation.objects.filter(owner__id=1)
-	User.objects.get(id=1).restaurantlocation_set.all()
-	.. User = RestaurantLocation.objects.first().owner.__class__
-	.. RestaurantLocation = User.objects.first().restaurantlocation_set.first().__class__
-'''
+
+	# RestaurantLocation.objects.filter(owner__id=1)
+	# User.objects.get(id=1).restaurantlocation_set.all()
+	# User = RestaurantLocation.objects.first().owner.__class__
+	# RestaurantLocation = User.objects.first().restaurantlocation_set.first().__class__
+
 	owner 		= models.ForeignKey(User)
 	name 		= models.CharField(max_length=120)
 	location 	= models.CharField(max_length=120,null=True,blank=True)
@@ -31,7 +31,7 @@ class RestaurantLocation(models.Model):
 		return self.name
 
 def RestaurantLocationPreSave(sender, instance, *args, **kwargs):
-	instance.category = instnce.category.capitalize()
+	instance.category = instance.category.capitalize()
 	if not instance.slug:
 		instance.slug = unique_slug_generator(instance)
 

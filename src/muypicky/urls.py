@@ -34,7 +34,7 @@ urlpatterns = [
 	url(r'^about/',TemplateView.as_view(template_name='about.html')),
 	url(r'^contact/',TemplateView.as_view(template_name='contact.html')),
     url(r'^restaurants/$',RestaurantListView.as_view()),
-    url(r'^restaurants/create/$',RestaurantLocationCreateView.as_view()),
+    url(r'^restaurants/create/$',RestaurantLocationCreate),
     url(r'^restaurants/(?P<slug>[\w-]+)/delete$', RestaurantLocationDeleteView.as_view()),
     #url(r'^restaurants/(?P<slug>\w+)/$',RestaurantListView.as_view()),
     url(r'^restaurants/(?P<slug>[\w-]+)/$',RestaurantDetailView.as_view()),
