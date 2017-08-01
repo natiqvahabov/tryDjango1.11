@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Restaurant List
+{% endblock %}
+
+{% block content %}
+	<h1>Restaurant List</h1>
+	{% if message %}
+		<h1>{{message}}</h1>
+	{% endif %}
+		<ul class="form-group">
+			{% for obj in object_list %}
+				<li>
+					<a href='/restaurants/{{obj.slug}}'> {{obj}}</a> 
+					<small>{{obj.category}}</small>
+				</li>
+			{% endfor %}
+		</ul>
+
+{% endblock %}
