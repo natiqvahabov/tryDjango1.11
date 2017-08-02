@@ -12,7 +12,7 @@
 		<ul class="form-group">
 			{% for obj in object_list %}
 				<li>
-					<a href='/restaurants/{{obj.slug}}'> {{obj}}</a> 
+					<a href='{{ obj.get_absolute_url }}'> {{obj}}</a> 
 					<small>{{obj.category}}</small>
 				</li>
 			{% endfor %}

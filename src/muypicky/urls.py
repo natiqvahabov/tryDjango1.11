@@ -31,13 +31,13 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$',HomeView.as_view()),
+    url(r'^$',HomeView.as_view(),name="home"),
     url(r'^login/$', LoginView.as_view(), name="login"),
-	url(r'^about/',TemplateView.as_view(template_name='about.html')),
-	url(r'^contact/',TemplateView.as_view(template_name='contact.html')),
-    url(r'^restaurants/$',RestaurantListView.as_view()),
-    url(r'^restaurants/create/$',RestaurantLocationCreateView.as_view()),
-    url(r'^restaurants/(?P<slug>[\w-]+)/delete$', RestaurantLocationDeleteView.as_view()),
+	url(r'^about/',TemplateView.as_view(template_name='about.html'),name="about"),
+	url(r'^contact/',TemplateView.as_view(template_name='contact.html'),name="contact"),
+    url(r'^restaurants/$',RestaurantListView.as_view(),name="restaurants"),
+    url(r'^restaurants/create/$',RestaurantLocationCreateView.as_view(),name="restaurant-create"),
+    url(r'^restaurants/(?P<slug>[\w-]+)/delete$', RestaurantLocationDeleteView.as_view(),name="restaurant-delete"),
     #url(r'^restaurants/(?P<slug>\w+)/$',RestaurantListView.as_view()),
-    url(r'^restaurants/(?P<slug>[\w-]+)/$',RestaurantDetailView.as_view()),
+    url(r'^restaurants/(?P<slug>[\w-]+)/$',RestaurantDetailView.as_view(),name="restaurant-detail"),
 ]
