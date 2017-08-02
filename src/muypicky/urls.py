@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.auth.views import LoginView
 
 from restaurants.views import (
     ContactView,
@@ -31,6 +32,7 @@ from django.views.generic import TemplateView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',HomeView.as_view()),
+    url(r'^login/$', LoginView.as_view(), name="login"),
 	url(r'^about/',TemplateView.as_view(template_name='about.html')),
 	url(r'^contact/',TemplateView.as_view(template_name='contact.html')),
     url(r'^restaurants/$',RestaurantListView.as_view()),
