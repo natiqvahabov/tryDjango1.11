@@ -1,4 +1,6 @@
 import random
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse,HttpResponseRedirect
@@ -36,7 +38,7 @@ class RestaurantLocationDeleteView(DeleteView):
 	# 	queryset.delete()
 	# 	return queryset
 
-
+@login_required()
 def RestaurantLocationCreate(request):
 	form = RestaurantLocationCreateForm(request.POST or None)
 	if form.is_valid():
@@ -55,7 +57,7 @@ def RestaurantLocationCreate(request):
 	return render(request, template_name, context)
 
 
-class RestaurantLocationCreateView(CreateView):
+class RestaurantLocationCreateView(LoginRequiredMixin,CreateView):
 	form_class = RestaurantLocationCreateForm
 	template_name = 'restaurants/form.html'
 	success_url = '/restaurants/'
