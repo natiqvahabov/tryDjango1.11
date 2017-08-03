@@ -16,6 +16,7 @@ class ContactView(View):
 		#print(kwargs) - ^contact/(?P<id>\d+)/$. - contact/23/ - kwargs: {'id': 23}
 		return render(request, 'contact.html', {})
 
+
 class HomeView(TemplateView):
 	template_name = 'home.html'
 
@@ -88,6 +89,7 @@ class RestaurantListView(ListView):
 class RestaurantDetailView(DetailView):
 	queryset = RestaurantLocation.objects.all()
 
+	template_name = "restaurants/restaurantlocation_detail.html"
 	# def get_context_data(self,*args,**kwargs):
 	# 	#print(self.kwargs). {(rest_id, 2)}
 	# 	context = super(RestaurantDetailView,self).get_context_data(*args,**kwargs)
