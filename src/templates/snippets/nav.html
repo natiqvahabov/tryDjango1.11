@@ -1,7 +1,11 @@
+
 <div class="container">
-	<h1>Vahabov.com</h1>
-	<a href="{% url 'home' %}">Home</a>
-	<a href="{% url 'about' %}">Aboug</a>
-	<a href="{% url 'contact' %}">Contact</a>
-	<a href="{% url 'restaurants:list' %}">Restaurants</a>
+<h1>Vahabov.com</h1>
+<div class="col-md-8 col-md-offset-2">
+	<a href="{% url 'home' %}">Home</a> &nbsp&nbsp
+	<a href="{% url 'about' %}">About</a>&nbsp&nbsp
+	<a href="{% url 'contact' %}">Contact</a>&nbsp&nbsp
+	<a href="{% url 'restaurants:list' %}">Restaurants</a>&nbsp&nbsp
+	<a href="{% url 'menus:list' %}">Items</a>&nbsp&nbsp
+</div>
 </div>

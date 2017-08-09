@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from .views import (
-	ProfileDetailView
+	ProfileDetailView,
 )
 
 urlpatterns = [
