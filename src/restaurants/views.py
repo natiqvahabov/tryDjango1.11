@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse,HttpResponseRedirect
 from django.views import View
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, DeleteView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, DeleteView, UpdateView
 from .forms import RestaurantLocationCreateForm
 from .models import RestaurantLocation
 # Create your views here.
@@ -39,6 +39,7 @@ class RestaurantLocationDeleteView(DeleteView):
 	# 	queryset.delete()
 	# 	return queryset
 
+
 @login_required()
 def RestaurantLocationCreate(request):
 	form = RestaurantLocationCreateForm(request.POST or None)
@@ -54,18 +55,40 @@ def RestaurantLocationCreate(request):
 		print(form.errors)
 
 	context = {'form':form}
-	template_name = 'restaurants/form.html'
+	template_name = 'form.html'
 	return render(request, template_name, context)
 
 
 class RestaurantLocationCreateView(LoginRequiredMixin,CreateView):
 	form_class = RestaurantLocationCreateForm
-	template_name = 'restaurants/form.html'
+	template_name = 'form.html'
+	login_url = '/login/'
 
 	def form_valid(self,form):
 		instance = form.save(commit=False)
 		instance.owner =self.request.user
 		return super(RestaurantLocationCreateView,self).form_valid(form)
+
+	def get_context_data(self, *args, **kwargs):
+		context = super(RestaurantLocationCreateView, self).get_context_data(*args, **kwargs)
+		context['title'] = 'Create Restaurant Location'
+		context['button_type'] = 'Create'
+		return context
+
+
+class RestaurantLocationUpdateView(LoginRequiredMixin,UpdateView):
+	form_class = RestaurantLocationCreateForm
+	template_name = 'form.html'
+	login_url = '/login/'
+
+	def get_queryset(self):
+		return RestaurantLocation.objects.filter(owner=self.request.user)
+
+	def get_context_data(self, *args, **kwargs):
+		context = super(RestaurantLocationUpdateView, self).get_context_data(*args, **kwargs)
+		context['title'] = 'Update Restaurant Location'
+		context['button_type'] = 'Update'
+		return context
 
 
 class RestaurantListView(ListView):
@@ -78,10 +101,11 @@ class RestaurantListView(ListView):
 				Q(category__iexact=slug) |
 				Q(category__icontains=slug)
 			)
+
 			if not queryset:
 				print("Nothing Found")
 		else:
-			queryset = RestaurantLocation.objects.all()
+			queryset = RestaurantLocation.objects.filter(owner=self.request.user)
 
 		return queryset
 

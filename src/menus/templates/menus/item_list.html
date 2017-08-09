@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Menu List
+{% endblock %}
+
+{% block content %}
+	<h1>Menu List</h1>
+	{% if message %}
+		<h1>{{message}}</h1>
+	{% endif %}
+		<ul class="form-group">
+			{% for obj in object_list %}
+				<li><a href="{{obj.get_absolute_url}}">{{obj.name}}</a><br/>
+					<h5>Includes</h5>
+					<ul>
+						{% for inc in obj.get_contents %}
+							<li>{{inc}}</li>
+						{% endfor %}
+					</ul>
+
+					<h5>Excludes</h5>
+					<ul>
+						{% for exc in obj.get_excludes %}
+							<li>{{exc}}</li>
+						{% endfor %}
+					</ul>
+				</li><br>
+			{% endfor %}
+		</ul>
+
+{% endblock %}
