@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^$',HomeView.as_view(),name="home"),
     url(r'^login/$', LoginView.as_view(), name="login"),
     url(r'^restaurants/', include('restaurants.urls', namespace="restaurants")),
+    url(r'^users/', include('profiles.urls', namespace="profiles")),
     url(r'^items/', include('menus.urls', namespace="menus")),
 	url(r'^about/',TemplateView.as_view(template_name='about.html'),name="about"),
 	url(r'^contact/',TemplateView.as_view(template_name='contact.html'),name="contact"),
