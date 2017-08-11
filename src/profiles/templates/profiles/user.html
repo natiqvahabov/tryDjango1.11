@@ -6,8 +6,13 @@
 
 {% block content %}
 	<h1>{{title}}</h1>
+	<div class="col-md-8 col-md-offset-2">
+		<h2>{{ user.username }}</h2>
+		{% if user != request.user %}
+			{% include 'profiles/snippet/follow_form.html' with username=user.username %}
+		{% endif %}
+	</div><br><br><br><br><br>
 	<hr/>
-
 	<div class="col-md-6 col-md-offset-4">
 		<form class="form" method="GET" action=".">
 			<input type="text" size="30" placeholder="enter.." name="q" value='{{ request.GET.q }}'> &nbsp

@@ -19,7 +19,6 @@ from django.contrib.auth.views import LoginView
 
 from restaurants.views import (
     ContactView,
-    HomeView,
     RestaurantLocationCreate,
     RestaurantListView,
     RestaurantDetailView,
@@ -27,12 +26,17 @@ from restaurants.views import (
     RestaurantLocationDeleteView
 )
 
+from menus.views import HomeView
+from profiles.views import FollowView, RegisterView
+
 from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',HomeView.as_view(),name="home"),
     url(r'^login/$', LoginView.as_view(), name="login"),
+    url(r'^register/$', RegisterView.as_view(), name="register"),
+    url(r'^follow/$', FollowView.as_view(), name="follow"),
     url(r'^restaurants/', include('restaurants.urls', namespace="restaurants")),
     url(r'^users/', include('profiles.urls', namespace="profiles")),
     url(r'^items/', include('menus.urls', namespace="menus")),
